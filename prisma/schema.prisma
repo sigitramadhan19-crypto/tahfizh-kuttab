@@ -1,0 +1,73 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  GURU
+  KEPALA_SEKOLAH
+  STAFF_TU
+}
+
+enum Category {
+  TAHFIZH_JADID
+  MURAJAAH
+  TILAWAH
+}
+
+model User {
+  id                 String   @id @default(cuid())
+  name               String
+  username           String   @unique
+  password           String
+  role               Role     @default(GURU)
+  mustChangePassword Boolean  @default(true)
+  classes            Class[]
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+model Class {
+  id        String    @id @default(cuid())
+  name      String
+  teacherId String?
+  teacher   User?     @relation(fields: [teacherId], references: [id])
+  students  Student[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Student {
+  id            String       @id @default(cuid())
+  name          String
+  classId       String
+  class         Class        @relation(fields: [classId], references: [id])
+  statusTilawah String?
+  totalJuz      Int          @default(0)
+  juzTasmi      String?
+  isActive      Boolean      @default(true)
+  depositLogs   DepositLog[]
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+}
+
+model DepositLog {
+  id             String   @id @default(cuid())
+  timestamp      DateTime @default(now())
+  studentId      String
+  student        Student  @relation(fields: [studentId], references: [id])
+  category       Category @default(TAHFIZH_JADID)
+  bookType       String?  // e.g., "Al-Quran", "Iqra Jilid 1"
+  sourceMaterial String?  // e.g., "Al-Baqarah", "Halaman 5"
+  startDetail    String?  // e.g., "Ayat 1", "Baris 1"
+  endDetail      String?  // e.g., "Ayat 5", "Baris 5"
+  grade          String?  // e.g., "A", "B", "Jayyid Jiddan"
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
