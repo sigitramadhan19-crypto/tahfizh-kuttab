@@ -6,7 +6,7 @@ Alhamdulillah, aplikasi Rekap Al-Quran Kuttab kini telah dapat diakses secara on
 
 ## 1. Akses Aplikasi & Login
 1. Buka browser (Google Chrome, Safari, atau Mozilla Firefox) di HP atau Laptop.
-2. Masukkan alamat aplikasi: **https://tahfizh-kuttab.insforge.site**
+2. Masukkan alamat aplikasi: **https://rekap-tahfizh-kuttab.netlify.app**
 3. Anda akan dihadapkan pada halaman **Login**.
    - Untuk **Guru Kelas**: Masukkan *Username* (Sandi Kelas) yang telah didaftarkan.
    - Untuk **Kepala Sekolah**: Masukkan *Username* khusus Kepala Sekolah (biasanya `kepsek` atau sesuai yang diatur oleh Admin).
