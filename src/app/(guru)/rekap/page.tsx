@@ -155,7 +155,7 @@ Mohon doanya agar ananda istiqomah. Barokallahu fiikum.`);
                     <a href={`https://wa.me/?text=${waText}`} target="_blank" rel="noopener noreferrer" className="flex-1 flex items-center justify-center gap-1.5 bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg text-xs font-semibold transition-colors">
                       <MessageCircle className="w-4 h-4" /> Kirim WA
                     </a>
-                    <a href={`/rapor/${student.id}`} target="_blank" className="flex-1 flex items-center justify-center gap-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 py-2 rounded-lg text-xs font-semibold transition-colors">
+                    <a href={`/rapor/${student.id}?period=${period || "this_month"}`} target="_blank" className="flex-1 flex items-center justify-center gap-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 py-2 rounded-lg text-xs font-semibold transition-colors">
                       <Printer className="w-4 h-4" /> Cetak Rapor
                     </a>
                   </div>

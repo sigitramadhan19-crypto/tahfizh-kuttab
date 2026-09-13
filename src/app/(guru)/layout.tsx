@@ -23,7 +23,7 @@ export default async function GuruLayout({
 
   return (
     <div className="min-h-screen bg-slate-100 pb-20 print:pb-0 print:bg-white">
-      <main className="max-w-3xl mx-auto bg-white min-h-screen print:min-h-0 shadow-sm relative">
+      <main className="max-w-3xl print:max-w-none mx-auto bg-white min-h-screen print:min-h-0 shadow-sm relative">
         {children}
       </main>
       <BottomNav />
