@@ -66,18 +66,18 @@ export default async function RekapCapaianPage({ searchParams }: { searchParams:
         <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
         <div className="absolute bottom-0 left-0 w-32 h-32 bg-black/10 rounded-full blur-xl"></div>
         
-        <header className="flex justify-between items-start relative z-10">
-          <div className="text-white space-y-1">
-            <h1 className="text-xl sm:text-2xl font-extrabold tracking-tight">Rekap Capaian</h1>
-            <p className="text-white/80 font-medium">Kelas: {myClass.name}</p>
-          </div>
-          <div className="flex items-center gap-3">
-            <PeriodFilter />
-            <form action={logoutAction}>
+        <header className="relative z-10 space-y-3">
+          <div className="flex justify-between items-center gap-3">
+            <h1 className="text-xl sm:text-2xl font-extrabold tracking-tight text-white">Rekap Capaian</h1>
+            <form action={logoutAction} className="shrink-0">
               <Button type="submit" variant="ghost" size="icon" className="text-white/80 hover:text-white hover:bg-white/20 transition-all rounded-full" title="Keluar">
                 <LogOut className="w-5 h-5" />
               </Button>
             </form>
+          </div>
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <p className="text-white/80 font-medium">Kelas: {myClass.name}</p>
+            <PeriodFilter />
           </div>
         </header>
       </div>
