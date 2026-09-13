@@ -90,13 +90,30 @@ const formSchema = z.object({
   }
 });
 
+type TodayLog = {
+  id: string;
+  category: "TAHFIZH_JADID" | "MURAJAAH" | "TILAWAH";
+  sourceMaterial: string | null;
+  startDetail: string | null;
+  endDetail: string | null;
+  grade: string | null;
+  timestamp: string | Date;
+};
+
+function formatCategoryLabel(cat: string) {
+  if (cat === "TAHFIZH_JADID") return "Tahfizh Jadid";
+  if (cat === "MURAJAAH") return "Muraja'ah";
+  if (cat === "TILAWAH") return "Tilawah";
+  return cat;
+}
+
 export default function InputSetoranPage() {
   const [open, setOpen] = useState(false);
   const [openSurah, setOpenSurah] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [students, setStudents] = useState<{id: string, name: string}[]>([]);
   const [className, setClassName] = useState<string>("");
-  const [studentProgress, setStudentProgress] = useState({ hasTahfizhJadid: false, hasMurajaah: false, hasTilawah: false });
+  const [studentProgress, setStudentProgress] = useState<{ hasTahfizhJadid: boolean; hasMurajaah: boolean; hasTilawah: boolean; logs: TodayLog[] }>({ hasTahfizhJadid: false, hasMurajaah: false, hasTilawah: false, logs: [] });
 
   useEffect(() => {
     async function fetchMyStudents() {
@@ -139,7 +156,7 @@ export default function InputSetoranPage() {
   useEffect(() => {
     async function fetchProgress() {
       if (!watchStudentId) {
-        setStudentProgress({ hasTahfizhJadid: false, hasMurajaah: false, hasTilawah: false });
+        setStudentProgress({ hasTahfizhJadid: false, hasMurajaah: false, hasTilawah: false, logs: [] });
         return;
       }
       const res = await getTodayStudentProgress(watchStudentId);
@@ -155,13 +172,17 @@ export default function InputSetoranPage() {
     try {
       const res = await saveDepositLog(values);
       if (res.success) {
-        toast.success("Setoran berhasil disimpan!");
+        if (res.alreadySaved) {
+          toast.success("Data yang sama sudah tersimpan sebelumnya — tidak disimpan dobel.");
+        } else {
+          toast.success("Tersimpan & sudah terverifikasi masuk ke database ✓");
+        }
         form.reset({ studentId: values.studentId }); // keep student selected
         // Re-fetch progress
         const progRes = await getTodayStudentProgress(values.studentId);
         if (progRes.success && progRes.data) setStudentProgress(progRes.data);
       } else {
-        toast.error(res.error || "Gagal menyimpan setoran.");
+        toast.error(res.error || "Gagal menyimpan setoran.", { duration: 8000 });
       }
     } catch (error) {
       toast.error("Terjadi kesalahan pada sistem.");
@@ -273,6 +294,19 @@ export default function InputSetoranPage() {
                   Tilawah
                 </span>
               </div>
+
+              {studentProgress.logs.length > 0 && (
+                <div className="w-full pt-2 mt-1 border-t border-slate-100 space-y-1.5">
+                  {studentProgress.logs.map((log) => (
+                    <div key={log.id} className="flex items-center gap-2 text-xs text-slate-600">
+                      <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                      <span className="font-semibold text-slate-700">{formatCategoryLabel(log.category)}</span>
+                      <span className="truncate">{log.sourceMaterial}{log.startDetail ? ` ${log.startDetail}` : ""}</span>
+                      {log.grade && <span className="ml-auto shrink-0 text-[10px] font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-500">{log.grade}</span>}
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           )}
 
