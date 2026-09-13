@@ -16,6 +16,12 @@ const pool = new Pool({
     rejectUnauthorized: false
   }
 });
+// Without this, an idle connection error (e.g. Aiven dropping a stale
+// connection) throws an unhandled 'error' event and crashes the whole
+// Node process mid-request instead of just failing that one query.
+pool.on("error", (err) => {
+  console.error("Unexpected error on idle Postgres client:", err);
+});
 const adapter = new PrismaPg(pool);
 
 export const prisma = globalForPrisma.prisma || new PrismaClient({ adapter });
