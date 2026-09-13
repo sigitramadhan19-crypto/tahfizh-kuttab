@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 
-export const AUTH_COOKIE_NAME = "insforge_session";
+export const AUTH_COOKIE_NAME = "session_token";
 
 export async function setSession(token: string) {
   const cookieStore = await cookies();

@@ -1,0 +1,5 @@
+# Never upload local secrets to Vercel's build environment.
+# Real values are configured via `vercel env` (see README).
+.env
+.env.local
+.env*.local
