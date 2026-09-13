@@ -100,6 +100,32 @@ type TodayLog = {
   timestamp: string | Date;
 };
 
+// Single source of truth for the form's "empty" shape. Every field must
+// always resolve to a defined value (never `undefined`) — mixing undefined
+// and defined values across renders is what makes Base UI's Select flip
+// between uncontrolled and controlled and throw a console error. This is
+// reused both for the form's initial defaultValues AND for resetting after
+// a save, since form.reset(values) replaces the whole form with exactly
+// `values` (any field left out becomes undefined, not its original default).
+function getDefaultFormValues(studentId: string = "") {
+  return {
+    studentId,
+    category: "" as any,
+    murajaahType: "" as any,
+    tilawahType: "" as any,
+    grade: "" as any,
+    baidOption: "",
+    qaribSurahs: [] as string[],
+    surah: "",
+    ayatStart: "",
+    ayatEnd: "",
+    jilid: "",
+    halaman: "",
+    barisStart: "",
+    barisEnd: "",
+  };
+}
+
 function formatCategoryLabel(cat: string) {
   if (cat === "TAHFIZH_JADID") return "Tahfizh Jadid";
   if (cat === "MURAJAAH") return "Muraja'ah";
@@ -130,22 +156,7 @@ export default function InputSetoranPage() {
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      studentId: "",
-      category: "" as any,
-      murajaahType: "" as any,
-      tilawahType: "" as any,
-      grade: "" as any,
-      baidOption: "",
-      qaribSurahs: [],
-      surah: "",
-      ayatStart: "",
-      ayatEnd: "",
-      jilid: "",
-      halaman: "",
-      barisStart: "",
-      barisEnd: "",
-    }
+    defaultValues: getDefaultFormValues()
   });
 
   const watchStudentId = form.watch("studentId");
@@ -177,7 +188,7 @@ export default function InputSetoranPage() {
         } else {
           toast.success("Tersimpan & sudah terverifikasi masuk ke database ✓");
         }
-        form.reset({ studentId: values.studentId }); // keep student selected
+        form.reset(getDefaultFormValues(values.studentId)); // keep student selected, clear the rest cleanly
         // Re-fetch progress
         const progRes = await getTodayStudentProgress(values.studentId);
         if (progRes.success && progRes.data) setStudentProgress(progRes.data);
