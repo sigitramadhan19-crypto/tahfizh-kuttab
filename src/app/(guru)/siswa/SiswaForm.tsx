@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 import { updateStudentsData, StudentUpdateData } from "@/app/actions/student";
+import { Spinner } from "@/components/ui/spinner";
 
 type SiswaFormProps = {
   initialStudents: {
@@ -160,6 +161,7 @@ export function SiswaForm({ initialStudents }: SiswaFormProps) {
           disabled={isSaving}
           className="bg-[#800000] hover:bg-[#600000] text-white font-bold shadow-md w-full h-12 rounded-xl text-base"
         >
+          {isSaving && <Spinner size="sm" className="text-white mr-2" />}
           {isSaving ? "Menyimpan..." : "Simpan Semua Perubahan"}
         </Button>
       </div>

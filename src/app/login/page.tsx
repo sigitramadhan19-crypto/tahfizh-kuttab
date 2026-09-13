@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { loginAction } from "./actions";
 import { LogIn, BookOpen } from "lucide-react";
+import { Spinner } from "@/components/ui/spinner";
 
 export default function LoginPage() {
   const [username, setUsername] = useState("");
@@ -154,7 +155,7 @@ export default function LoginPage() {
               disabled={loading}
               className="w-full h-12 rounded-xl bg-[#800000] hover:bg-[#600000] active:scale-[0.98] text-white font-bold text-sm shadow-lg transition-all duration-200 flex items-center justify-center gap-2 mt-2 disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              <LogIn className="w-5 h-5" />
+              {loading ? <Spinner size="md" className="text-white" /> : <LogIn className="w-5 h-5" />}
               {loading ? "Memproses..." : "Masuk Sekarang"}
             </button>
           </form>

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { changePasswordAction } from "@/app/actions/changePassword";
 import { KeyRound, Eye, EyeOff, ShieldCheck } from "lucide-react";
+import { Spinner } from "@/components/ui/spinner";
 
 interface Props {
   userId: string;
@@ -163,7 +164,7 @@ export function GantiPasswordClient({ userId, userName, username, redirectAfter 
             disabled={loading || newPassword.length < 6 || newPassword !== confirm}
             className="w-full h-12 rounded-xl bg-[#800000] hover:bg-[#600000] text-white font-bold text-sm shadow-md transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed mt-2"
           >
-            <KeyRound className="w-5 h-5" />
+            {loading ? <Spinner size="md" className="text-white" /> : <KeyRound className="w-5 h-5" />}
             {loading ? "Menyimpan..." : "Simpan Password Baru"}
           </button>
         </form>

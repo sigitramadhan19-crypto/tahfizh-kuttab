@@ -6,6 +6,7 @@ import { Search, KeyRound, ArrowLeft } from "lucide-react";
 import { toast } from "sonner";
 import { adminResetUserPasswordAction } from "./actions";
 import Link from "next/link";
+import { Spinner } from "@/components/ui/spinner";
 
 type UserData = {
   id: string;
@@ -221,6 +222,7 @@ export function UsersClient({ users }: UsersClientProps) {
                     className="w-full bg-[#800000] hover:bg-[#660000] text-white"
                     disabled={isSubmitting}
                   >
+                    {isSubmitting && <Spinner size="sm" className="text-white mr-2" />}
                     {isSubmitting ? "Menyimpan..." : "Simpan Password"}
                   </Button>
                 </div>

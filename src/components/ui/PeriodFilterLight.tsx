@@ -3,6 +3,7 @@
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { CalendarDays } from "lucide-react";
 import { useTransition } from "react";
+import { Spinner } from "@/components/ui/spinner";
 
 const PERIOD_OPTIONS = [
   { value: "today", label: "Hari Ini" },
@@ -45,7 +46,11 @@ export function PeriodFilterLight({ defaultPeriod = "this_month" }: { defaultPer
           </option>
         ))}
       </select>
-      {isPending && <span className="w-3 h-3 border-2 border-slate-300 border-t-slate-600 rounded-full animate-spin mr-2"></span>}
+      {isPending && (
+        <span className="mr-2 animate-in fade-in zoom-in-50 duration-200">
+          <Spinner size="sm" className="text-slate-500" />
+        </span>
+      )}
     </div>
   );
 }
