@@ -183,7 +183,7 @@ export function UsersClient({ users }: UsersClientProps) {
       {/* Reset Password Modal */}
       {isModalOpen && selectedUser && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm">
-          <div className="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+          <div className="bg-white rounded-2xl shadow-xl w-full max-w-md max-h-[90vh] overflow-y-auto overflow-x-hidden animate-in fade-in zoom-in-95 duration-200">
             <div className="p-6">
               <h2 className="text-xl font-bold text-slate-800 mb-2">Reset Password</h2>
               <p className="text-sm text-slate-500 mb-6">
@@ -207,7 +207,7 @@ export function UsersClient({ users }: UsersClientProps) {
                   </p>
                 </div>
 
-                <div className="flex gap-3 pt-4">
+                <div className="grid grid-cols-2 gap-3 pt-4">
                   <Button
                     type="button"
                     variant="outline"
