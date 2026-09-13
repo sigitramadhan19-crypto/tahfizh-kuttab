@@ -175,12 +175,12 @@ export default async function BerandaGuru() {
               else if (log.grade?.includes("Tidak")) gradeColor = "bg-rose-100 text-rose-700";
 
               return (
-                <div key={log.id} className="flex items-center justify-between p-4 bg-white rounded-2xl shadow-sm border border-slate-50 hover:border-slate-100 transition-colors">
-                  <div className="flex items-center gap-3">
+                <div key={log.id} className="flex items-center justify-between gap-3 p-4 bg-white rounded-2xl shadow-sm border border-slate-50 hover:border-slate-100 transition-colors">
+                  <div className="flex items-center gap-3 min-w-0 flex-1">
                     <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center font-bold text-slate-500 text-sm shrink-0">
                       {studentInitial}
                     </div>
-                    <div className="overflow-hidden">
+                    <div className="min-w-0 flex-1">
                       <p className="font-bold text-slate-800 text-sm truncate">{log.student.name}</p>
                       <p className="text-xs text-slate-500 mt-0.5 font-medium truncate">{detailText}</p>
                     </div>
