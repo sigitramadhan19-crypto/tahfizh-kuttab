@@ -12,11 +12,11 @@ const PERIOD_OPTIONS = [
   { value: "all_time", label: "Semua Waktu" },
 ];
 
-export function RaporPeriodFilter() {
+export function PeriodFilterLight({ defaultPeriod = "this_month" }: { defaultPeriod?: string }) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const currentPeriod = searchParams.get("period") || "this_month";
+  const currentPeriod = searchParams.get("period") || defaultPeriod;
   const [isPending, startTransition] = useTransition();
 
   const handlePeriodChange = (e: React.ChangeEvent<HTMLSelectElement>) => {

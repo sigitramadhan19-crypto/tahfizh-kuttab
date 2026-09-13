@@ -5,7 +5,7 @@ import { getJuzFromSurah } from "@/lib/quran";
 import { format } from "date-fns";
 import { id as idLocale } from "date-fns/locale";
 import { PrintButton } from "./PrintButton";
-import { RaporPeriodFilter } from "./RaporPeriodFilter";
+import { PeriodFilterLight } from "@/components/ui/PeriodFilterLight";
 import { getDateRangeFromPeriod } from "@/lib/date";
 import { Category } from "@prisma/client";
 
@@ -109,7 +109,7 @@ export default async function RaporPage({
 
       {/* Controls (hidden on print) */}
       <div className="max-w-4xl mx-auto mb-4 flex items-center justify-between print:hidden">
-        <RaporPeriodFilter />
+        <PeriodFilterLight />
       </div>
 
       <div className="relative max-w-4xl mx-auto bg-white p-8 sm:p-12 shadow-md print:shadow-none print:w-full overflow-hidden">

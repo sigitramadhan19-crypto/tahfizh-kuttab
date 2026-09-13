@@ -3,7 +3,8 @@ import { prisma } from "@/lib/prisma";
 import { redirect } from "next/navigation";
 import { logoutAction } from "@/app/login/actions";
 import { Button } from "@/components/ui/button";
-import { LogOut, MessageCircle, Printer } from "lucide-react";
+import { LogOut, MessageCircle, Printer, FileDown } from "lucide-react";
+import Link from "next/link";
 import { getJuzFromSurah } from "@/lib/quran";
 import { ProgressChart } from "./ProgressChart";
 import { PeriodFilter } from "@/components/ui/PeriodFilter";
@@ -83,6 +84,22 @@ export default async function RekapCapaianPage({ searchParams }: { searchParams:
       </div>
 
       <div className="px-4 space-y-4">
+        {students.length > 0 && (
+          <Link href={`/rekap/cetak?period=${period || "this_month"}`} target="_blank" className="block">
+            <div className="bg-white border border-slate-100 rounded-2xl p-4 flex items-center justify-between shadow-sm hover:shadow-md transition-all">
+              <div className="flex items-center gap-4">
+                <div className="p-3 bg-rose-50 rounded-xl shrink-0">
+                  <FileDown className="w-6 h-6 text-[#800000]" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-slate-800">Unduh PDF Rekap Kelas</h3>
+                  <p className="text-xs text-slate-500 font-medium">Capaian semua siswa — Tahfizh, Muraja&apos;ah &amp; Tilawah</p>
+                </div>
+              </div>
+            </div>
+          </Link>
+        )}
+
         {students.length > 0 && <ProgressChart data={chartData} />}
 
         {students.length === 0 ? (
