@@ -3,8 +3,8 @@
 import { useState, useMemo } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { LogOut, Search, Eye, Users } from "lucide-react";
-import { logoutAction } from "@/app/login/actions";
+import { Search, Eye, Users, BookOpen, Book, BadgeCheck, Clock } from "lucide-react";
+import { PageHeader } from "@/components/layout/PageHeader";
 import { 
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer 
 } from "recharts";
@@ -110,140 +110,91 @@ export function KepsekDashboardClient({
   const dashboardTitle = userRole === "STAFF_TU" ? "Dasbor Staff TU" : "Dasbor Kepala Sekolah";
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-paper">
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <header className="bg-gradient-to-r from-[#800000] to-[#b30000] text-white p-4 sm:p-6 shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0 md:rounded-b-2xl">
-          <div>
-            <h1 className="text-xl sm:text-2xl font-bold">{dashboardTitle}</h1>
-            <p className="text-red-200 text-sm mt-1 sm:mt-0">{teacherName}</p>
-          </div>
-          <div className="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-start">
-            <PeriodFilter />
+        <PageHeader
+          title={dashboardTitle}
+          subtitle={teacherName}
+          action={
             <div className="flex items-center gap-2">
-              <Link href="/kepsek/users">
-                <Button variant="ghost" className="text-white hover:bg-white/20 hover:text-white h-10 px-3 hidden sm:flex" title="Manajemen Pengguna">
-                  <Users className="w-5 h-5 mr-2" />
-                  <span className="text-sm font-semibold">Kelola Pengguna</span>
-                </Button>
-                <Button variant="ghost" className="text-white hover:bg-white/20 hover:text-white rounded-full h-10 w-10 p-2 flex sm:hidden" title="Manajemen Pengguna">
-                  <Users className="w-5 h-5" />
-                </Button>
+              <PeriodFilter />
+              <Link href="/kepsek/users" title="Manajemen Pengguna" className="h-10 px-3 inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white text-sm font-semibold text-slate-700 hover:border-brand-300 hover:text-brand-700 transition-colors">
+                <Users className="w-4 h-4" />
+                <span className="hidden sm:inline">Kelola Pengguna</span>
               </Link>
-              <form action={logoutAction}>
-                <Button type="submit" variant="ghost" className="text-white hover:bg-white/20 hover:text-white rounded-full h-10 w-10 p-2" title="Keluar">
-                  <LogOut className="w-5 h-5" />
-                </Button>
-              </form>
             </div>
-          </div>
-        </header>
+          }
+        />
 
         <main className="p-4 sm:p-6 space-y-6">
 
         {/* Metric Cards */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
-          <Card className="border-0 shadow-sm rounded-xl overflow-hidden hover:shadow-md transition-shadow">
-            <div className="h-1 bg-red-500 w-full" />
-            <CardHeader className="pb-2 pt-4 px-3 sm:px-4">
-              <CardTitle className="text-[10px] sm:text-xs text-slate-500 uppercase font-bold tracking-wider">Total Siswa Aktif</CardTitle>
-            </CardHeader>
-            <CardContent className="px-3 sm:px-4 pb-4">
-              <p className="text-2xl sm:text-3xl font-bold text-slate-800">{stats.totalSiswa}</p>
-            </CardContent>
-          </Card>
-          
-          <Card className="border-0 shadow-sm rounded-xl overflow-hidden">
-            <div className="h-1 bg-emerald-500 w-full" />
-            <CardHeader className="pb-2 pt-4 px-3 sm:px-4">
-              <CardTitle className="text-[10px] sm:text-xs text-slate-500 uppercase font-bold tracking-wider">Fase Al-Quran</CardTitle>
-            </CardHeader>
-            <CardContent className="px-3 sm:px-4 pb-4">
-              <p className="text-2xl sm:text-3xl font-bold text-emerald-600">{stats.faseAlQuran}</p>
-            </CardContent>
-          </Card>
-
-          <Card className="border-0 shadow-sm rounded-xl overflow-hidden">
-            <div className="h-1 bg-amber-500 w-full" />
-            <CardHeader className="pb-2 pt-4 px-3 sm:px-4">
-              <CardTitle className="text-[10px] sm:text-xs text-slate-500 uppercase font-bold tracking-wider">Fase Iqra</CardTitle>
-            </CardHeader>
-            <CardContent className="px-3 sm:px-4 pb-4">
-              <p className="text-2xl sm:text-3xl font-bold text-amber-600">{stats.faseIqra}</p>
-            </CardContent>
-          </Card>
-
-          <Card className="border-0 shadow-sm rounded-xl overflow-hidden">
-            <div className="h-1 bg-purple-500 w-full" />
-            <CardHeader className="pb-2 pt-4 px-3 sm:px-4">
-              <CardTitle className="text-[10px] sm:text-xs text-slate-500 uppercase font-bold tracking-wider">Sudah Tasmi'</CardTitle>
-            </CardHeader>
-            <CardContent className="px-3 sm:px-4 pb-4">
-              <p className="text-2xl sm:text-3xl font-bold text-slate-800">
-                {stats.sudahTasmi}
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card className="border-0 shadow-sm rounded-xl overflow-hidden">
-            <div className="h-1 bg-rose-500 w-full" />
-            <CardHeader className="pb-2 pt-4 px-3 sm:px-4">
-              <CardTitle className="text-[10px] sm:text-xs text-slate-500 uppercase font-bold tracking-wider">Belum Tasmi'</CardTitle>
-            </CardHeader>
-            <CardContent className="px-3 sm:px-4 pb-4">
-              <p className="text-2xl sm:text-3xl font-bold text-rose-600">{stats.belumTasmi}</p>
-            </CardContent>
-          </Card>
+          {[
+            { label: "Total siswa aktif", value: stats.totalSiswa, Icon: Users, chip: "bg-slate-100 text-slate-700" },
+            { label: "Fase Al-Qur'an", value: stats.faseAlQuran, Icon: BookOpen, chip: "bg-ocean-50 text-ocean-600" },
+            { label: "Fase Iqra", value: stats.faseIqra, Icon: Book, chip: "bg-olive-100 text-olive-700" },
+            { label: "Sudah tasmi'", value: stats.sudahTasmi, Icon: BadgeCheck, chip: "bg-cocoa-50 text-cocoa-600" },
+            { label: "Belum tasmi'", value: stats.belumTasmi, Icon: Clock, chip: "bg-brand-50 text-brand-600" },
+          ].map(({ label, value, Icon, chip }) => (
+            <div key={label} className="bg-white border border-slate-200 rounded-2xl p-4">
+              <div className={`size-10 grid place-items-center rounded-xl mb-3 ${chip}`}>
+                <Icon className="w-5 h-5" />
+              </div>
+              <p className="text-3xl font-extrabold text-slate-800 leading-none">{value}</p>
+              <p className="mt-1.5 text-sm font-medium text-slate-500">{label}</p>
+            </div>
+          ))}
         </div>
 
         {/* Charts */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <Card className="border-0 shadow-sm rounded-xl">
+          <Card className="border border-slate-200 shadow-none rounded-2xl ring-0">
             <CardHeader>
-              <CardTitle className="text-sm font-bold text-center">Frekuensi Setoran per Kelas</CardTitle>
+              <CardTitle className="text-base font-bold text-slate-800">Frekuensi Setoran per Kelas</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="h-[250px] w-full">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 40 }}>
-                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" />
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e0e1df" />
                     <XAxis 
                       dataKey="kelas" 
-                      tick={{ fontSize: 10, fill: '#64748b' }} 
+                      tick={{ fontSize: 10, fill: '#6b7377' }} 
                       axisLine={false} 
                       tickLine={false} 
                       angle={-45} 
                       textAnchor="end"
                     />
-                    <YAxis tick={{ fontSize: 10, fill: '#64748b' }} axisLine={false} tickLine={false} />
-                    <Tooltip cursor={{ fill: '#f1f5f9' }} contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} />
-                    <Bar dataKey="frekuensi" fill="#60a5fa" radius={[4, 4, 0, 0]} name="Frekuensi Setoran" />
+                    <YAxis tick={{ fontSize: 10, fill: '#6b7377' }} axisLine={false} tickLine={false} />
+                    <Tooltip cursor={{ fill: '#f6f6f5' }} contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} />
+                    <Bar dataKey="frekuensi" fill="#b73b3b" radius={[4, 4, 0, 0]} name="Frekuensi Setoran" />
                   </BarChart>
                 </ResponsiveContainer>
               </div>
             </CardContent>
           </Card>
           
-          <Card className="border-0 shadow-sm rounded-xl">
+          <Card className="border border-slate-200 shadow-none rounded-2xl ring-0">
             <CardHeader>
-              <CardTitle className="text-sm font-bold text-center">Total Capaian Hafalan (Juz) per Kelas</CardTitle>
+              <CardTitle className="text-base font-bold text-slate-800">Total Capaian Hafalan (Juz) per Kelas</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="h-[250px] w-full">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 40 }}>
-                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" />
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e0e1df" />
                     <XAxis 
                       dataKey="kelas" 
-                      tick={{ fontSize: 10, fill: '#64748b' }} 
+                      tick={{ fontSize: 10, fill: '#6b7377' }} 
                       axisLine={false} 
                       tickLine={false} 
                       angle={-45} 
                       textAnchor="end"
                     />
-                    <YAxis tick={{ fontSize: 10, fill: '#64748b' }} axisLine={false} tickLine={false} />
-                    <Tooltip cursor={{ fill: '#f1f5f9' }} contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} />
-                    <Bar dataKey="totalJuz" fill="#34d399" radius={[4, 4, 0, 0]} name="Total Juz" />
+                    <YAxis tick={{ fontSize: 10, fill: '#6b7377' }} axisLine={false} tickLine={false} />
+                    <Tooltip cursor={{ fill: '#f6f6f5' }} contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} />
+                    <Bar dataKey="totalJuz" fill="#3b87b8" radius={[4, 4, 0, 0]} name="Total Juz" />
                   </BarChart>
                 </ResponsiveContainer>
               </div>
@@ -252,7 +203,7 @@ export function KepsekDashboardClient({
         </div>
 
         {/* Filters and Table */}
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+        <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden">
           <div className="p-4 sm:p-6 border-b border-slate-100 flex flex-col sm:flex-row gap-4 items-end bg-slate-50/50 flex-wrap">
             <div className="w-full sm:flex-1 space-y-1.5 min-w-[200px]">
               <label className="text-xs font-bold text-slate-500">Pencarian Siswa</label>
@@ -263,7 +214,7 @@ export function KepsekDashboardClient({
                   placeholder="Ketik nama siswa..."
                   value={searchName}
                   onChange={e => setSearchName(e.target.value)}
-                  className="w-full h-10 pl-9 pr-3 rounded-lg border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-[#800000] bg-white transition-all"
+                  className="w-full h-10 pl-9 pr-3 rounded-lg border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-brand-400 bg-white transition-all"
                 />
               </div>
             </div>
@@ -271,7 +222,7 @@ export function KepsekDashboardClient({
             <div className="w-full sm:w-1/4 space-y-1.5">
               <label className="text-xs font-bold text-slate-500">Filter Kelas</label>
               <select 
-                className="w-full h-10 px-3 rounded-lg border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-[#800000] bg-white"
+                className="w-full h-10 px-3 rounded-lg border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-brand-400 bg-white"
                 value={filterKelas}
                 onChange={e => setFilterKelas(e.target.value)}
               >
@@ -283,7 +234,7 @@ export function KepsekDashboardClient({
             <div className="w-full sm:w-1/4 space-y-1.5">
               <label className="text-xs font-bold text-slate-500">Fase Tilawah</label>
               <select 
-                className="w-full h-10 px-3 rounded-lg border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-[#800000] bg-white"
+                className="w-full h-10 px-3 rounded-lg border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-brand-400 bg-white"
                 value={filterFase}
                 onChange={e => setFilterFase(e.target.value)}
               >
@@ -296,7 +247,7 @@ export function KepsekDashboardClient({
             <div className="w-full sm:w-1/4 space-y-1.5">
               <label className="text-xs font-bold text-slate-500">Pencapaian Juz</label>
               <select 
-                className="w-full h-10 px-3 rounded-lg border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-[#800000] bg-white"
+                className="w-full h-10 px-3 rounded-lg border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-brand-400 bg-white"
                 value={filterJuz}
                 onChange={e => setFilterJuz(e.target.value)}
               >
@@ -348,16 +299,16 @@ export function KepsekDashboardClient({
                       <td className="px-6 py-4 font-medium text-slate-800">{student.nama}</td>
                       <td className="px-6 py-4 text-slate-600">{student.kelas}</td>
                       <td className="px-6 py-4">
-                        <span className={`px-2.5 py-1 text-[10px] font-bold rounded-full ${student.tilawah === 'Al-Quran' ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'}`}>
+                        <span className={`px-2.5 py-1 text-[10px] font-bold rounded-full ${student.tilawah === 'Al-Quran' ? 'bg-ocean-100 text-ocean-700' : 'bg-olive-100 text-olive-700'}`}>
                           {student.tilawah}
                         </span>
                       </td>
                       <td className="px-6 py-4 text-slate-600">{student.capaianTahfizh}</td>
                       <td className="px-6 py-4">
-                        <span className="font-bold text-[#800000]">{student.totalJuz}</span>
+                        <span className="font-bold text-brand-600">{student.totalJuz}</span>
                       </td>
                       <td className="px-6 py-4">
-                        <span className={`font-semibold ${student.juzTasmi.includes("Belum") ? 'text-slate-400 font-normal' : 'text-emerald-600'}`}>
+                        <span className={`font-semibold ${student.juzTasmi.includes("Belum") ? 'text-slate-400 font-normal' : 'text-ocean-600'}`}>
                           {student.juzTasmi}
                         </span>
                       </td>
@@ -366,7 +317,7 @@ export function KepsekDashboardClient({
                           variant="ghost" 
                           size="sm"
                           onClick={() => handleOpenDetail(student.id)}
-                          className="h-8 px-2 text-blue-600 hover:bg-blue-50 hover:text-blue-700 transition-colors"
+                          className="h-8 px-2 text-ocean-600 hover:bg-ocean-50 hover:text-ocean-700 transition-colors"
                         >
                           <Eye className="w-4 h-4 mr-1" />
                           <span className="text-xs font-semibold">Detail</span>
@@ -395,12 +346,12 @@ export function KepsekDashboardClient({
                   </div>
                   {/* Row 2: Info chips */}
                   <div className="flex flex-wrap items-center gap-2">
-                    <span className={`px-2 py-0.5 text-[10px] font-bold rounded-full ${student.tilawah === 'Al-Quran' ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'}`}>
+                    <span className={`px-2 py-0.5 text-[10px] font-bold rounded-full ${student.tilawah === 'Al-Quran' ? 'bg-ocean-100 text-ocean-700' : 'bg-olive-100 text-olive-700'}`}>
                       {student.tilawah}
                     </span>
                     <span className="text-xs text-slate-500">{student.capaianTahfizh || '-'}</span>
-                    <span className="text-xs font-bold text-[#800000]">{student.totalJuz} Juz</span>
-                    <span className={`text-xs ${student.juzTasmi.includes("Belum") ? 'text-slate-400' : 'text-emerald-600 font-semibold'}`}>
+                    <span className="text-xs font-bold text-brand-600">{student.totalJuz} Juz</span>
+                    <span className={`text-xs ${student.juzTasmi.includes("Belum") ? 'text-slate-400' : 'text-ocean-600 font-semibold'}`}>
                       {student.juzTasmi}
                     </span>
                   </div>
@@ -410,7 +361,7 @@ export function KepsekDashboardClient({
                       variant="outline" 
                       size="sm"
                       onClick={() => handleOpenDetail(student.id)}
-                      className="h-7 px-3 text-xs border-blue-200 text-blue-600 hover:bg-blue-50 hover:text-blue-700"
+                      className="h-7 px-3 text-xs border-ocean-200 text-ocean-600 hover:bg-ocean-50 hover:text-ocean-700"
                     >
                       <Eye className="w-3 h-3 mr-1.5" />
                       Lihat Detail

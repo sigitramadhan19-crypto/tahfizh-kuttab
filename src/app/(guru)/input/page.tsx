@@ -1,12 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { PageHeader } from "@/components/layout/PageHeader";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { Check, ChevronsUpDown, BookOpen, LogOut } from "lucide-react";
+import { Check, ChevronsUpDown, BookOpen } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { logoutAction } from "@/app/login/actions";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -204,23 +204,7 @@ export default function InputSetoranPage() {
 
   return (
     <div className="space-y-6 pb-24">
-      {/* Header with Gradient */}
-      <div className="bg-gradient-to-r from-[#800000] to-[#b30000] sm:rounded-b-3xl px-6 pt-10 pb-10 shadow-lg relative overflow-hidden">
-        <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
-        <div className="absolute bottom-0 left-0 w-32 h-32 bg-black/10 rounded-full blur-xl"></div>
-        
-        <header className="flex justify-between items-start relative z-10">
-          <div className="text-white space-y-1">
-            <h1 className="text-2xl font-extrabold tracking-tight">Input Setoran</h1>
-            {className && <p className="text-white/80 font-medium">Siswa dari {className}</p>}
-          </div>
-          <form action={logoutAction}>
-            <Button type="submit" variant="ghost" size="icon" className="text-white/80 hover:text-white hover:bg-white/20 transition-all rounded-full" title="Keluar">
-              <LogOut className="w-5 h-5" />
-            </Button>
-          </form>
-        </header>
-      </div>
+      <PageHeader title="Input Setoran" subtitle={className ? `Siswa ${className} · pilih siswa, kategori, lalu predikat nilai` : "Pilih siswa, kategori, lalu predikat nilai"} />
 
       <div className="px-4 sm:px-6">
 
@@ -242,7 +226,7 @@ export default function InputSetoranPage() {
                       role="combobox"
                       aria-expanded={open}
                       className={cn(
-                        "flex h-12 w-full items-center justify-between rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm shadow-sm hover:border-[#800000]/50 transition-colors focus:outline-none focus:ring-1 focus:ring-[#800000]",
+                        "flex h-12 w-full items-center justify-between rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm shadow-sm hover:border-brand-600/50 transition-colors focus:outline-none focus:ring-1 focus:ring-brand-600",
                         !field.value && "text-muted-foreground"
                       )}
                     >
@@ -292,16 +276,16 @@ export default function InputSetoranPage() {
             <div className="flex flex-col sm:flex-row sm:items-center gap-2 p-3 bg-white border border-slate-200 shadow-sm rounded-xl text-sm font-medium animate-in fade-in slide-in-from-top-2">
               <span className="text-slate-600 mr-2 text-xs uppercase tracking-wider font-bold">Setoran Hari Ini:</span>
               <div className="flex flex-wrap items-center gap-2">
-                <span className={cn("flex items-center px-2.5 py-1 rounded-md border transition-colors", studentProgress.hasTahfizhJadid ? "bg-emerald-50 border-emerald-200 text-emerald-700" : "bg-slate-50 border-slate-100 text-slate-400")}>
-                  {studentProgress.hasTahfizhJadid ? <Check className="w-4 h-4 mr-1.5 text-emerald-600" /> : <div className="w-3.5 h-3.5 mr-1.5 rounded-full border-2 border-slate-300" />}
+                <span className={cn("flex items-center px-2.5 py-1 rounded-md border transition-colors", studentProgress.hasTahfizhJadid ? "bg-ocean-50 border-ocean-200 text-ocean-700" : "bg-slate-50 border-slate-100 text-slate-400")}>
+                  {studentProgress.hasTahfizhJadid ? <Check className="w-4 h-4 mr-1.5 text-ocean-600" /> : <div className="w-3.5 h-3.5 mr-1.5 rounded-full border-2 border-slate-300" />}
                   Tahfizh Jadid
                 </span>
-                <span className={cn("flex items-center px-2.5 py-1 rounded-md border transition-colors", studentProgress.hasMurajaah ? "bg-emerald-50 border-emerald-200 text-emerald-700" : "bg-slate-50 border-slate-100 text-slate-400")}>
-                  {studentProgress.hasMurajaah ? <Check className="w-4 h-4 mr-1.5 text-emerald-600" /> : <div className="w-3.5 h-3.5 mr-1.5 rounded-full border-2 border-slate-300" />}
+                <span className={cn("flex items-center px-2.5 py-1 rounded-md border transition-colors", studentProgress.hasMurajaah ? "bg-ocean-50 border-ocean-200 text-ocean-700" : "bg-slate-50 border-slate-100 text-slate-400")}>
+                  {studentProgress.hasMurajaah ? <Check className="w-4 h-4 mr-1.5 text-ocean-600" /> : <div className="w-3.5 h-3.5 mr-1.5 rounded-full border-2 border-slate-300" />}
                   Muraja'ah
                 </span>
-                <span className={cn("flex items-center px-2.5 py-1 rounded-md border transition-colors", studentProgress.hasTilawah ? "bg-emerald-50 border-emerald-200 text-emerald-700" : "bg-slate-50 border-slate-100 text-slate-400")}>
-                  {studentProgress.hasTilawah ? <Check className="w-4 h-4 mr-1.5 text-emerald-600" /> : <div className="w-3.5 h-3.5 mr-1.5 rounded-full border-2 border-slate-300" />}
+                <span className={cn("flex items-center px-2.5 py-1 rounded-md border transition-colors", studentProgress.hasTilawah ? "bg-ocean-50 border-ocean-200 text-ocean-700" : "bg-slate-50 border-slate-100 text-slate-400")}>
+                  {studentProgress.hasTilawah ? <Check className="w-4 h-4 mr-1.5 text-ocean-600" /> : <div className="w-3.5 h-3.5 mr-1.5 rounded-full border-2 border-slate-300" />}
                   Tilawah
                 </span>
               </div>
@@ -310,7 +294,7 @@ export default function InputSetoranPage() {
                 <div className="w-full pt-2 mt-1 border-t border-slate-100 space-y-1.5">
                   {studentProgress.logs.map((log) => (
                     <div key={log.id} className="flex items-center gap-2 text-xs text-slate-600">
-                      <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                      <Check className="w-3.5 h-3.5 text-ocean-600 shrink-0" />
                       <span className="font-semibold text-slate-700">{formatCategoryLabel(log.category)}</span>
                       <span className="truncate">{log.sourceMaterial}{log.startDetail ? ` ${log.startDetail}` : ""}</span>
                       {log.grade && <span className="ml-auto shrink-0 text-[10px] font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-500">{log.grade}</span>}
@@ -333,7 +317,7 @@ export default function InputSetoranPage() {
                   form.setValue("tilawahType", "" as any);
                 }} value={field.value}>
                   <FormControl>
-                    <SelectTrigger className="h-12 rounded-xl">
+                    <SelectTrigger className="h-12 w-full rounded-xl bg-white">
                       <SelectValue placeholder="Pilih kategori setoran" />
                     </SelectTrigger>
                   </FormControl>
@@ -359,7 +343,7 @@ export default function InputSetoranPage() {
                     <FormLabel>Jenis Muraja'ah</FormLabel>
                     <Select onValueChange={field.onChange} value={field.value}>
                       <FormControl>
-                        <SelectTrigger className="bg-white">
+                        <SelectTrigger className="h-11 w-full rounded-xl bg-white">
                           <SelectValue placeholder="Pilih Ba'id atau Qarib" />
                         </SelectTrigger>
                       </FormControl>
@@ -382,7 +366,7 @@ export default function InputSetoranPage() {
                       <FormLabel>Pilih Bagian (Ba'id)</FormLabel>
                       <Select onValueChange={field.onChange} value={field.value}>
                         <FormControl>
-                          <SelectTrigger className="bg-white">
+                          <SelectTrigger className="h-11 w-full rounded-xl bg-white">
                             <SelectValue placeholder="Pilih 1/4 Juz..." />
                           </SelectTrigger>
                         </FormControl>
@@ -432,7 +416,7 @@ export default function InputSetoranPage() {
                     <FormLabel>Jenis Tilawah</FormLabel>
                     <Select onValueChange={field.onChange} value={field.value}>
                       <FormControl>
-                        <SelectTrigger className="bg-white">
+                        <SelectTrigger className="h-11 w-full rounded-xl bg-white">
                           <SelectValue placeholder="Al-Quran atau Iqra" />
                         </SelectTrigger>
                       </FormControl>
@@ -456,7 +440,7 @@ export default function InputSetoranPage() {
                         <FormLabel>Jilid</FormLabel>
                         <Select onValueChange={field.onChange} value={field.value}>
                           <FormControl>
-                            <SelectTrigger className="bg-white">
+                            <SelectTrigger className="h-11 w-full rounded-xl bg-white">
                               <SelectValue placeholder="Pilih Jilid" />
                             </SelectTrigger>
                           </FormControl>
@@ -477,7 +461,7 @@ export default function InputSetoranPage() {
                       <FormItem>
                         <FormLabel>Halaman</FormLabel>
                         <FormControl>
-                          <Input type="number" placeholder="Misal: 15" {...field} className="bg-white" />
+                          <Input type="number" placeholder="Misal: 15" {...field} className="h-11 rounded-xl bg-white" />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -490,7 +474,7 @@ export default function InputSetoranPage() {
                       <FormItem>
                         <FormLabel>Mulai Baris</FormLabel>
                         <FormControl>
-                          <Input type="number" placeholder="Misal: 1" {...field} className="bg-white" />
+                          <Input type="number" placeholder="Misal: 1" {...field} className="h-11 rounded-xl bg-white" />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -503,7 +487,7 @@ export default function InputSetoranPage() {
                       <FormItem>
                         <FormLabel>Sampai Baris</FormLabel>
                         <FormControl>
-                          <Input type="number" placeholder="Misal: 5" {...field} className="bg-white" />
+                          <Input type="number" placeholder="Misal: 5" {...field} className="h-11 rounded-xl bg-white" />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -529,7 +513,7 @@ export default function InputSetoranPage() {
                           role="combobox"
                           aria-expanded={openSurah}
                           className={cn(
-                            "flex h-12 w-full items-center justify-between rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm shadow-sm hover:border-[#800000]/50 transition-colors focus:outline-none focus:ring-1 focus:ring-[#800000]",
+                            "flex h-12 w-full items-center justify-between rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm shadow-sm hover:border-brand-600/50 transition-colors focus:outline-none focus:ring-1 focus:ring-brand-600",
                             !field.value && "text-muted-foreground"
                           )}
                         >
@@ -581,7 +565,7 @@ export default function InputSetoranPage() {
                     <FormItem>
                       <FormLabel>Mulai Ayat</FormLabel>
                       <FormControl>
-                        <Input type="number" placeholder="Ayat 1" {...field} className="bg-white" />
+                        <Input type="number" placeholder="Ayat 1" {...field} className="h-11 rounded-xl bg-white" />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -594,7 +578,7 @@ export default function InputSetoranPage() {
                     <FormItem>
                       <FormLabel>Sampai Ayat</FormLabel>
                       <FormControl>
-                        <Input type="number" placeholder="Ayat 5" {...field} className="bg-white" />
+                        <Input type="number" placeholder="Ayat 5" {...field} className="h-11 rounded-xl bg-white" />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -612,7 +596,7 @@ export default function InputSetoranPage() {
                 <FormLabel className="font-bold text-slate-700">Predikat Nilai</FormLabel>
                 <Select onValueChange={field.onChange} value={field.value}>
                   <FormControl>
-                    <SelectTrigger className="h-12 rounded-xl">
+                    <SelectTrigger className="h-12 w-full rounded-xl bg-white">
                       <SelectValue placeholder="Pilih Nilai" />
                     </SelectTrigger>
                   </FormControl>
@@ -629,7 +613,7 @@ export default function InputSetoranPage() {
 
           <Button 
             type="submit" 
-            className="w-full h-14 text-base font-bold rounded-xl shadow-md bg-emerald-600 hover:bg-emerald-700 text-white transition-all"
+            className="w-full h-14 text-base font-bold rounded-2xl shadow-[0_8px_24px_-12px_rgba(158,49,49,0.6)] bg-brand-600 hover:bg-brand-700 text-white transition-all"
             disabled={isSubmitting}
           >
             {isSubmitting ? <Spinner size="md" className="text-white mr-2" /> : <BookOpen className="w-5 h-5 mr-2" />}

@@ -1,16 +1,11 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
 import NextTopLoader from 'nextjs-toploader';
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const jakarta = Plus_Jakarta_Sans({
+  variable: "--font-jakarta",
   subsets: ["latin"],
 });
 
@@ -25,18 +20,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="id">
+    <html lang="id" className={jakarta.variable}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className="antialiased"
       >
         <NextTopLoader
-          color="#800000"
+          color="#b73b3b"
           height={3}
           showSpinner={false}
           easing="cubic-bezier(0.4, 0, 0.2, 1)"
           speed={400}
           crawlSpeed={200}
-          shadow="0 0 10px #800000, 0 0 5px #800000"
+          shadow="0 0 10px #b73b3b, 0 0 5px #b73b3b"
         />
         {children}
         <Toaster />

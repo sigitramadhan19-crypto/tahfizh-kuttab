@@ -1,7 +1,5 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { BookOpen, Users, Award, LogOut, Activity, ChevronRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { logoutAction } from "@/app/login/actions";
+import { BookOpen, Users, Award, Plus, ChevronRight } from "lucide-react";
+import { PageHeader } from "@/components/layout/PageHeader";
 import Link from "next/link";
 import { getSession } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
@@ -78,89 +76,67 @@ export default async function BerandaGuru() {
     }
   });
 
+  const kelasLabel = teacher.classes.map((c) => c.name).join(", ");
+  const jam = Number(new Intl.DateTimeFormat("id-ID", { hour: "numeric", hour12: false, timeZone: "Asia/Jakarta" }).format(new Date()));
+  const waktu = jam < 11 ? "pagi" : jam < 15 ? "siang" : jam < 18 ? "sore" : "malam";
+  const tanggal = new Intl.DateTimeFormat("id-ID", { weekday: "long", day: "numeric", month: "long", timeZone: "Asia/Jakarta" }).format(new Date());
+
   return (
-    <div className="space-y-6 pb-24">
-      {/* Header with Gradient */}
-      <div className="bg-gradient-to-r from-[#800000] to-[#b30000] rounded-b-3xl px-6 pt-10 pb-12 shadow-lg relative overflow-hidden">
-        {/* Decorative Circles */}
-        <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
-        <div className="absolute bottom-0 left-0 w-32 h-32 bg-black/10 rounded-full blur-xl"></div>
-        
-        <header className="flex justify-between items-start relative z-10">
-          <div className="text-white space-y-1">
-            <h1 className="text-2xl font-extrabold tracking-tight">Assalamu'alaikum,</h1>
-            <p className="text-white/80 font-medium">{teacherName}</p>
-          </div>
-          <form action={logoutAction}>
-            <Button type="submit" variant="ghost" size="icon" className="text-white/80 hover:text-white hover:bg-white/20 transition-all rounded-full" title="Keluar">
-              <LogOut className="w-5 h-5" />
-            </Button>
-          </form>
-        </header>
-      </div>
+    <div className="space-y-5 pb-24">
+      <PageHeader eyebrow={`Selamat ${waktu}, ${tanggal}`} title={teacherName} subtitle={kelasLabel || undefined} />
 
       {/* Summary Cards */}
-      <div className="px-4 -mt-8 relative z-20">
-        <div className="grid grid-cols-2 gap-4">
-          <Card className="bg-white border-0 shadow-md rounded-2xl overflow-hidden hover:shadow-lg transition-shadow">
-            <CardHeader className="p-4 pb-2 bg-emerald-50/50">
-              <div className="p-2 bg-emerald-100 w-fit rounded-lg mb-1">
-                <Users className="w-5 h-5 text-emerald-600" />
-              </div>
-              <CardTitle className="text-sm font-semibold text-slate-600">Total Siswa</CardTitle>
-            </CardHeader>
-            <CardContent className="p-4 pt-1">
-              <span className="text-3xl font-extrabold text-slate-800">{totalSiswa}</span>
-            </CardContent>
-          </Card>
-          
-          <Card className="bg-white border-0 shadow-md rounded-2xl overflow-hidden hover:shadow-lg transition-shadow">
-            <CardHeader className="p-4 pb-2 bg-blue-50/50">
-              <div className="p-2 bg-blue-100 w-fit rounded-lg mb-1">
-                <BookOpen className="w-5 h-5 text-blue-600" />
-              </div>
-              <CardTitle className="text-sm font-semibold text-slate-600">Setoran Hari Ini</CardTitle>
-            </CardHeader>
-            <CardContent className="p-4 pt-1">
-              <span className="text-3xl font-extrabold text-slate-800">{setoranHariIni}</span>
-            </CardContent>
-          </Card>
+      <div className="px-4">
+        <div className="grid grid-cols-2 gap-3">
+          <div className="bg-white border border-slate-200 rounded-2xl p-4">
+            <div className="size-10 grid place-items-center rounded-xl bg-ocean-50 text-ocean-600 mb-3">
+              <Users className="w-5 h-5" />
+            </div>
+            <p className="text-3xl font-extrabold text-slate-800 leading-none">{totalSiswa}</p>
+            <p className="mt-1.5 text-sm font-medium text-slate-500">Total siswa</p>
+          </div>
+          <div className="bg-white border border-slate-200 rounded-2xl p-4">
+            <div className="size-10 grid place-items-center rounded-xl bg-brand-50 text-brand-600 mb-3">
+              <BookOpen className="w-5 h-5" />
+            </div>
+            <p className="text-3xl font-extrabold text-slate-800 leading-none">{setoranHariIni}</p>
+            <p className="mt-1.5 text-sm font-medium text-slate-500">Setoran hari ini</p>
+          </div>
         </div>
       </div>
 
       {/* Quick Action */}
       <div className="px-4">
         <Link href="/input" className="block">
-          <div className="bg-white border border-slate-100 rounded-2xl p-4 flex items-center justify-between shadow-sm hover:shadow-md transition-all">
-            <div className="flex items-center gap-4">
-              <div className="p-3 bg-rose-50 rounded-xl">
-                <Activity className="w-6 h-6 text-[#800000]" />
-              </div>
-              <div>
-                <h3 className="font-bold text-slate-800">Input Setoran Baru</h3>
-                <p className="text-xs text-slate-500 font-medium">Catat hafalan & tilawah siswa</p>
-              </div>
+          <div className="bg-brand-600 hover:bg-brand-700 transition-colors rounded-2xl p-4 flex items-center gap-4 text-white shadow-[0_8px_24px_-12px_rgba(158,49,49,0.6)]">
+            <div className="size-12 grid place-items-center rounded-xl bg-white/15 shrink-0">
+              <Plus className="w-6 h-6" />
             </div>
-            <ChevronRight className="w-5 h-5 text-slate-400" />
+            <div className="flex-1 min-w-0">
+              <h3 className="font-bold text-[17px]">Input Setoran Baru</h3>
+              <p className="text-sm text-white/80 font-medium">Catat hafalan, muraja&apos;ah &amp; tilawah</p>
+            </div>
+            <ChevronRight className="w-5 h-5 text-white/80" />
           </div>
         </Link>
       </div>
 
       {/* Recent Activity */}
-      <div className="px-4 space-y-4">
-        <div className="flex justify-between items-end">
-          <h2 className="text-lg font-bold text-slate-800 flex items-center gap-2">
-            <Award className="w-5 h-5 text-amber-500" />
+      <div className="px-4">
+        <div className="bg-white border border-slate-200 rounded-2xl p-4 space-y-3">
+        <div className="flex justify-between items-center">
+          <h2 className="text-base font-bold text-slate-800 flex items-center gap-2">
+            <Award className="w-5 h-5 text-olive-600" />
             Setoran Terakhir
           </h2>
-          <Link href="/riwayat" className="text-xs font-semibold text-[#800000] hover:underline">
-            Lihat Semua
+          <Link href="/riwayat" className="text-sm font-semibold text-brand-600 hover:underline">
+            Lihat semua
           </Link>
         </div>
         
-        <div className="space-y-3">
+        <div>
           {recentDeposits.length === 0 ? (
-            <p className="text-sm text-slate-500 text-center py-4 bg-white rounded-2xl border border-slate-50 shadow-sm">Belum ada setoran tercatat.</p>
+            <p className="text-sm text-slate-500 text-center py-6">Belum ada setoran tercatat.</p>
           ) : (
             recentDeposits.map((log) => {
               const studentInitial = log.student.name.substring(0, 1).toUpperCase();
@@ -170,14 +146,14 @@ export default async function BerandaGuru() {
               if (log.endDetail) detailText += `-${log.endDetail}`;
               
               let gradeColor = "bg-slate-100 text-slate-700";
-              if (log.grade === "Lancar") gradeColor = "bg-emerald-100 text-emerald-700";
-              else if (log.grade?.includes("Biasa")) gradeColor = "bg-blue-100 text-blue-700";
-              else if (log.grade?.includes("Tidak")) gradeColor = "bg-rose-100 text-rose-700";
+              if (log.grade === "Lancar") gradeColor = "bg-ocean-50 text-ocean-700";
+              else if (log.grade?.includes("Biasa")) gradeColor = "bg-olive-100 text-olive-800";
+              else if (log.grade?.includes("Tidak")) gradeColor = "bg-brand-50 text-brand-700";
 
               return (
-                <div key={log.id} className="flex items-center justify-between gap-3 p-4 bg-white rounded-2xl shadow-sm border border-slate-50 hover:border-slate-100 transition-colors">
+                <div key={log.id} className="flex items-center justify-between gap-3 py-2.5 border-t border-slate-100 first:border-t-0">
                   <div className="flex items-center gap-3 min-w-0 flex-1">
-                    <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center font-bold text-slate-500 text-sm shrink-0">
+                    <div className="w-10 h-10 rounded-full bg-cocoa-50 flex items-center justify-center font-bold text-cocoa-600 text-sm shrink-0">
                       {studentInitial}
                     </div>
                     <div className="min-w-0 flex-1">
@@ -194,6 +170,7 @@ export default async function BerandaGuru() {
               );
             })
           )}
+        </div>
         </div>
       </div>
     </div>

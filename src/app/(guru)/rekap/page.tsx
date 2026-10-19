@@ -1,9 +1,8 @@
 import { getSession } from "@/lib/auth";
+import { PageHeader } from "@/components/layout/PageHeader";
 import { prisma } from "@/lib/prisma";
 import { redirect } from "next/navigation";
-import { logoutAction } from "@/app/login/actions";
-import { Button } from "@/components/ui/button";
-import { LogOut, MessageCircle, Printer, FileDown } from "lucide-react";
+import { MessageCircle, Printer, FileDown } from "lucide-react";
 import Link from "next/link";
 import { getJuzFromSurah } from "@/lib/quran";
 import { ProgressChart } from "./ProgressChart";
@@ -62,34 +61,15 @@ export default async function RekapCapaianPage({ searchParams }: { searchParams:
 
   return (
     <div className="space-y-6 pb-24">
-      {/* Header with Gradient */}
-      <div className="bg-gradient-to-r from-[#800000] to-[#b30000] sm:rounded-b-3xl px-6 pt-10 pb-10 shadow-lg relative overflow-hidden">
-        <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
-        <div className="absolute bottom-0 left-0 w-32 h-32 bg-black/10 rounded-full blur-xl"></div>
-        
-        <header className="relative z-10 space-y-3">
-          <div className="flex justify-between items-center gap-3">
-            <h1 className="text-xl sm:text-2xl font-extrabold tracking-tight text-white">Rekap Capaian</h1>
-            <form action={logoutAction} className="shrink-0">
-              <Button type="submit" variant="ghost" size="icon" className="text-white/80 hover:text-white hover:bg-white/20 transition-all rounded-full" title="Keluar">
-                <LogOut className="w-5 h-5" />
-              </Button>
-            </form>
-          </div>
-          <div className="flex flex-wrap items-center justify-between gap-2">
-            <p className="text-white/80 font-medium">Kelas: {myClass.name}</p>
-            <PeriodFilter />
-          </div>
-        </header>
-      </div>
+      <PageHeader title="Rekap Capaian" subtitle={myClass.name} action={<PeriodFilter />} />
 
       <div className="px-4 space-y-4">
         {students.length > 0 && (
           <Link href={`/rekap/cetak?period=${period || "this_month"}`} target="_blank" className="block">
             <div className="bg-white border border-slate-100 rounded-2xl p-4 flex items-center justify-between shadow-sm hover:shadow-md transition-all">
               <div className="flex items-center gap-4">
-                <div className="p-3 bg-rose-50 rounded-xl shrink-0">
-                  <FileDown className="w-6 h-6 text-[#800000]" />
+                <div className="p-3 bg-brand-50 rounded-xl shrink-0">
+                  <FileDown className="w-6 h-6 text-brand-600" />
                 </div>
                 <div>
                   <h3 className="font-bold text-slate-800">Unduh PDF Rekap Kelas</h3>
@@ -144,7 +124,7 @@ Mohon doanya agar ananda istiqomah. Barokallahu fiikum.`);
                 {/* ===== MOBILE: original grid layout ===== */}
                 <div className="md:hidden p-4 flex flex-col gap-3">
                   <div className="border-b border-slate-100 pb-2">
-                    <h3 className="font-bold text-[#800000]">{student.name}</h3>
+                    <h3 className="font-bold text-brand-600">{student.name}</h3>
                   </div>
                   <div className="grid grid-cols-2 gap-y-3 gap-x-2 text-sm">
                     <div>
@@ -164,7 +144,7 @@ Mohon doanya agar ananda istiqomah. Barokallahu fiikum.`);
                   </div>
                   {/* Tasmi Status on Mobile */}
                   <div className="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between">
-                    <span className="font-medium text-emerald-600 text-xs">
+                    <span className="font-medium text-ocean-600 text-xs">
                       {juzTasmi === "Belum Tasmi'" ? "Belum Tasmi'" : `Sudah Tasmi' (${juzTasmi})`}
                     </span>
                   </div>
@@ -181,7 +161,7 @@ Mohon doanya agar ananda istiqomah. Barokallahu fiikum.`);
                 {/* ===== DESKTOP: single-row layout ===== */}
                 <div className="hidden md:flex items-center gap-4 px-4 py-3">
                   <div className="w-52 shrink-0">
-                    <span className="font-semibold text-[#800000] text-sm">{student.name}</span>
+                    <span className="font-semibold text-brand-600 text-sm">{student.name}</span>
                   </div>
                   <div className="flex items-center gap-1.5 w-16 shrink-0">
                     <span className="text-[10px] font-bold text-slate-400 uppercase">Juz</span>
@@ -192,7 +172,7 @@ Mohon doanya agar ananda istiqomah. Barokallahu fiikum.`);
                     <span className="font-medium text-slate-600 text-xs line-clamp-2 leading-relaxed">{posisiTahfizh}</span>
                   </div>
                   <div className="flex items-start gap-1.5 w-44 shrink-0">
-                    <span className="font-medium text-emerald-600 text-xs line-clamp-2 leading-relaxed mt-0.5">
+                    <span className="font-medium text-ocean-600 text-xs line-clamp-2 leading-relaxed mt-0.5">
                       {juzTasmi === "Belum Tasmi'" ? "Belum Tasmi'" : `Sudah Tasmi' (${juzTasmi})`}
                     </span>
                   </div>

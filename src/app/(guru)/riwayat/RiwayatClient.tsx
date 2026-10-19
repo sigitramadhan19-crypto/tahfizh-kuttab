@@ -89,9 +89,9 @@ export function RiwayatClient({ logs, students }: { logs: Log[], students: Stude
             if (log.endDetail) detailText += `-${log.endDetail}`;
             
             let gradeColor = "bg-slate-100 text-slate-700";
-            if (log.grade === "Lancar") gradeColor = "bg-emerald-100 text-emerald-700";
-            else if (log.grade?.includes("Biasa")) gradeColor = "bg-blue-100 text-blue-700";
-            else if (log.grade?.includes("Tidak")) gradeColor = "bg-rose-100 text-rose-700";
+            if (log.grade === "Lancar") gradeColor = "bg-ocean-100 text-ocean-700";
+            else if (log.grade?.includes("Biasa")) gradeColor = "bg-ocean-100 text-ocean-700";
+            else if (log.grade?.includes("Tidak")) gradeColor = "bg-brand-100 text-brand-700";
 
             return (
               <div key={log.id} className="p-4 bg-white rounded-2xl shadow-sm border border-slate-50 flex flex-col gap-3">
@@ -124,7 +124,7 @@ export function RiwayatClient({ logs, students }: { logs: Log[], students: Stude
                 <div className="bg-slate-50 p-3 rounded-xl border border-slate-100 text-sm">
                   <span className="font-semibold text-slate-700">{formatCategory(log.category)}</span>
                   <p className="text-slate-600 mt-0.5">
-                    {log.sourceMaterial && <span className="font-medium text-[#800000]">{log.sourceMaterial}</span>}
+                    {log.sourceMaterial && <span className="font-medium text-brand-600">{log.sourceMaterial}</span>}
                     {log.startDetail && <span> {log.startDetail}</span>}
                     {log.endDetail && <span> s.d {log.endDetail}</span>}
                   </p>

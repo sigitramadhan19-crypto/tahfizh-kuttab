@@ -45,22 +45,18 @@ export function GantiPasswordClient({ userId, userName, username, redirectAfter 
   };
 
   return (
-    <div className="flex min-h-screen w-full items-center justify-center bg-slate-100 px-4">
-      <div className="w-full max-w-md bg-white rounded-3xl shadow-xl overflow-hidden">
+    <div className="flex min-h-screen w-full items-center justify-center bg-paper px-4">
+      <div className="w-full max-w-md bg-white rounded-3xl border border-slate-200 shadow-[0_20px_50px_-30px_rgba(46,52,56,0.35)] overflow-hidden">
 
         {/* Header */}
-        <div className="bg-gradient-to-br from-[#800000] to-[#b30000] px-8 pt-10 pb-12 text-white relative overflow-hidden">
-          <div className="absolute -top-8 -right-8 w-32 h-32 bg-white/10 rounded-full blur-2xl" />
-          <div className="absolute -bottom-4 -left-4 w-24 h-24 bg-black/10 rounded-full blur-xl" />
-          <div className="relative z-10">
-            <div className="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center mb-4">
-              <KeyRound className="w-7 h-7 text-white" />
-            </div>
-            <h1 className="text-2xl font-extrabold">Ganti Password</h1>
-            <p className="text-white/80 text-sm mt-1">
-              Halo, <span className="font-semibold">{userName}</span>! Demi keamanan akun, silakan buat password baru sebelum melanjutkan.
-            </p>
+        <div className="px-8 pt-9 pb-2">
+          <div className="w-14 h-14 bg-brand-50 rounded-2xl flex items-center justify-center mb-4">
+            <KeyRound className="w-7 h-7 text-brand-600" />
           </div>
+          <h1 className="text-[26px] font-extrabold text-slate-800 leading-tight">Ganti Password</h1>
+          <p className="text-slate-500 text-sm mt-1">
+            Halo, <span className="font-semibold text-slate-700">{userName}</span>! Demi keamanan akun, silakan buat password baru sebelum melanjutkan.
+          </p>
         </div>
 
         {/* Form */}
@@ -70,9 +66,9 @@ export function GantiPasswordClient({ userId, userName, username, redirectAfter 
           <input type="text" name="username" autoComplete="username" value={username} readOnly className="hidden" />
 
           {/* Info box */}
-          <div className="bg-amber-50 border border-amber-200 rounded-xl p-3 flex gap-2">
-            <ShieldCheck className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
-            <p className="text-amber-800 text-xs leading-relaxed">
+          <div className="bg-olive-50 border border-olive-200 rounded-xl p-3 flex gap-2">
+            <ShieldCheck className="w-5 h-5 text-olive-700 shrink-0 mt-0.5" />
+            <p className="text-olive-800 text-xs leading-relaxed">
               Password Anda saat ini masih menggunakan password default. Wajib diganti sebelum dapat menggunakan aplikasi.
             </p>
           </div>
@@ -89,7 +85,7 @@ export function GantiPasswordClient({ userId, userName, username, redirectAfter 
                 required
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
-                className="w-full h-12 pl-4 pr-11 rounded-xl border border-slate-300 bg-white text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-[#800000] focus:border-transparent transition-all"
+                className="w-full h-12 pl-4 pr-11 rounded-xl border border-slate-300 bg-white text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-brand-400 focus:border-transparent transition-all"
               />
               <button
                 type="button"
@@ -106,10 +102,10 @@ export function GantiPasswordClient({ userId, userName, username, redirectAfter 
                   key={i}
                   className={`h-1 flex-1 rounded-full transition-all ${
                     newPassword.length === 0 ? 'bg-slate-200' :
-                    newPassword.length < 4 && i < 2 ? 'bg-red-400' :
-                    newPassword.length < 6 && i < 3 ? 'bg-amber-400' :
-                    newPassword.length < 8 && i < 4 ? 'bg-yellow-400' :
-                    newPassword.length >= 8 && i < 5 ? 'bg-emerald-500' :
+                    newPassword.length < 4 && i < 2 ? 'bg-brand-400' :
+                    newPassword.length < 6 && i < 3 ? 'bg-olive-400' :
+                    newPassword.length < 8 && i < 4 ? 'bg-olive-400' :
+                    newPassword.length >= 8 && i < 5 ? 'bg-ocean-500' :
                     'bg-slate-200'
                   }`}
                 />
@@ -137,10 +133,10 @@ export function GantiPasswordClient({ userId, userName, username, redirectAfter 
                 onChange={(e) => setConfirm(e.target.value)}
                 className={`w-full h-12 pl-4 pr-11 rounded-xl border text-slate-800 text-sm focus:outline-none focus:ring-2 transition-all ${
                   confirm.length > 0 && confirm !== newPassword
-                    ? 'border-red-300 focus:ring-red-400 bg-red-50'
+                    ? 'border-brand-300 focus:ring-brand-400 bg-brand-50'
                     : confirm.length > 0 && confirm === newPassword
-                    ? 'border-emerald-300 focus:ring-emerald-400 bg-emerald-50'
-                    : 'border-slate-300 bg-white focus:ring-[#800000] focus:border-transparent'
+                    ? 'border-ocean-300 focus:ring-ocean-400 bg-ocean-50'
+                    : 'border-slate-300 bg-white focus:ring-brand-400 focus:border-transparent'
                 }`}
               />
               <button
@@ -152,17 +148,17 @@ export function GantiPasswordClient({ userId, userName, username, redirectAfter 
               </button>
             </div>
             {confirm.length > 0 && confirm !== newPassword && (
-              <p className="text-xs text-red-500">Password tidak cocok.</p>
+              <p className="text-xs text-brand-500">Password tidak cocok.</p>
             )}
             {confirm.length > 0 && confirm === newPassword && (
-              <p className="text-xs text-emerald-600">Password cocok ✓</p>
+              <p className="text-xs text-ocean-600">Password cocok ✓</p>
             )}
           </div>
 
           <button
             type="submit"
             disabled={loading || newPassword.length < 6 || newPassword !== confirm}
-            className="w-full h-12 rounded-xl bg-[#800000] hover:bg-[#600000] text-white font-bold text-sm shadow-md transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed mt-2"
+            className="w-full h-12 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm shadow-md transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed mt-2"
           >
             {loading ? <Spinner size="md" className="text-white" /> : <KeyRound className="w-5 h-5" />}
             {loading ? "Menyimpan..." : "Simpan Password Baru"}

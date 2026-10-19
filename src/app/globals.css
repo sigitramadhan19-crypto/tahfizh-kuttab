@@ -4,12 +4,70 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Palet Kuttab: merah #B73B3B (identitas), biru #3B87B8, zaitun #B8B63B, cokelat #634040, arang #2E3438.
+   Turunan gelap dipakai untuk teks/tombol agar kontras; zaitun hanya diberi teks gelap. */
+@theme {
+  --color-brand-50: #fbf0f0;
+  --color-brand-100: #f6dddd;
+  --color-brand-200: #ecbaba;
+  --color-brand-300: #de8c8c;
+  --color-brand-400: #cb5f5f;
+  --color-brand-500: #b73b3b;
+  --color-brand-600: #9e3131;
+  --color-brand-700: #832929;
+  --color-brand-800: #692323;
+  --color-brand-900: #4d1b1b;
+  --color-ocean-50: #eef5fa;
+  --color-ocean-100: #d7e8f3;
+  --color-ocean-200: #b0d0e6;
+  --color-ocean-300: #80b2d4;
+  --color-ocean-400: #5797c4;
+  --color-ocean-500: #3b87b8;
+  --color-ocean-600: #2f6e97;
+  --color-ocean-700: #285a7a;
+  --color-ocean-800: #22475f;
+  --color-ocean-900: #1a3446;
+  --color-olive-50: #f8f8e8;
+  --color-olive-100: #efeec8;
+  --color-olive-200: #e0df9b;
+  --color-olive-300: #cfcd6c;
+  --color-olive-400: #c2c04d;
+  --color-olive-500: #b8b63b;
+  --color-olive-600: #8e8c2d;
+  --color-olive-700: #6b6a23;
+  --color-olive-800: #504f1c;
+  --color-olive-900: #393815;
+  --color-cocoa-50: #f7f1f1;
+  --color-cocoa-100: #ede1e1;
+  --color-cocoa-200: #dbc3c3;
+  --color-cocoa-300: #bf9b9b;
+  --color-cocoa-400: #9c7171;
+  --color-cocoa-500: #7d5555;
+  --color-cocoa-600: #634040;
+  --color-cocoa-700: #523535;
+  --color-cocoa-800: #402a2a;
+  --color-cocoa-900: #2e1f1f;
+  /* Netral "slate" diganti turunan arang #2E3438 */
+  --color-slate-50: #f6f6f5;
+  --color-slate-100: #eeeeec;
+  --color-slate-200: #e0e1df;
+  --color-slate-300: #c6c9c9;
+  --color-slate-400: #979da0;
+  --color-slate-500: #6b7377;
+  --color-slate-600: #51595d;
+  --color-slate-700: #3e4549;
+  --color-slate-800: #2e3438;
+  --color-slate-900: #22272a;
+  --color-slate-950: #16191b;
+  --color-paper: #faf8f5;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-sans);
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, monospace;
+  --font-heading: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -49,30 +107,30 @@
 }
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
+  --background: #faf8f5;
+  --foreground: #2e3438;
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
+  --card-foreground: #2e3438;
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
+  --popover-foreground: #2e3438;
+  --primary: #9e3131;
+  --primary-foreground: #ffffff;
+  --secondary: #eeeeec;
+  --secondary-foreground: #2e3438;
+  --muted: #eeeeec;
+  --muted-foreground: #6b7377;
+  --accent: #fbf0f0;
+  --accent-foreground: #832929;
+  --destructive: #b73b3b;
+  --border: #e0e1df;
+  --input: #d5d7d6;
+  --ring: #cb5f5f;
+  --chart-1: #b73b3b;
+  --chart-2: #3b87b8;
+  --chart-3: #b8b63b;
+  --chart-4: #634040;
+  --chart-5: #2e3438;
+  --radius: 0.75rem;
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);

@@ -43,7 +43,7 @@ export function StudentDetailModal({ isOpen, onClose, data, loading }: Props) {
       <div className="bg-white w-full max-w-2xl rounded-2xl shadow-xl overflow-hidden flex flex-col max-h-[90vh] animate-in fade-in zoom-in-95 duration-200">
         
         {/* Header */}
-        <div className="bg-gradient-to-r from-[#800000] to-[#b30000] p-6 text-white relative">
+        <div className="bg-brand-600 p-6 text-white relative">
           <button 
             onClick={onClose}
             className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/20 transition-colors"
@@ -64,9 +64,9 @@ export function StudentDetailModal({ isOpen, onClose, data, loading }: Props) {
               {loading ? (
                 <div className="h-4 w-32 bg-white/20 rounded animate-pulse" />
               ) : (
-                <div className="flex items-center gap-3 text-red-100 text-sm mt-1">
+                <div className="flex items-center gap-3 text-brand-100 text-sm mt-1">
                   <span>Kelas: {data?.className}</span>
-                  <span className="w-1 h-1 bg-red-200 rounded-full" />
+                  <span className="w-1 h-1 bg-brand-200 rounded-full" />
                   <span>Total Hafalan: {data?.totalJuz} Juz</span>
                 </div>
               )}
@@ -89,11 +89,11 @@ export function StudentDetailModal({ isOpen, onClose, data, loading }: Props) {
                 onClick={() => setActiveTab(tab.id as any)}
                 className={`flex-1 py-3 px-4 flex items-center justify-center gap-2 text-sm font-semibold transition-colors border-b-2 ${
                   isActive 
-                    ? "border-[#800000] text-[#800000] bg-white" 
+                    ? "border-brand-600 text-brand-600 bg-white" 
                     : "border-transparent text-slate-500 hover:text-slate-700 hover:bg-slate-100/50"
                 } rounded-t-lg`}
               >
-                <Icon className={`w-4 h-4 ${isActive ? 'text-[#800000]' : 'text-slate-400'}`} />
+                <Icon className={`w-4 h-4 ${isActive ? 'text-brand-600' : 'text-slate-400'}`} />
                 {tab.label}
               </button>
             );
@@ -123,7 +123,7 @@ export function StudentDetailModal({ isOpen, onClose, data, loading }: Props) {
               {logs.map((log) => (
                 <div key={log.id} className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
                   {/* Timeline dot */}
-                  <div className="flex items-center justify-center w-10 h-10 rounded-full border-4 border-slate-50 bg-[#800000] text-white shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 shadow z-10">
+                  <div className="flex items-center justify-center w-10 h-10 rounded-full border-4 border-slate-50 bg-brand-600 text-white shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 shadow z-10">
                     <Clock className="w-4 h-4" />
                   </div>
                   
@@ -134,7 +134,7 @@ export function StudentDetailModal({ isOpen, onClose, data, loading }: Props) {
                         {format(new Date(log.timestamp), "d MMM yyyy, HH:mm", { locale: id })}
                       </span>
                       {log.grade && (
-                        <span className="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded-md">
+                        <span className="text-xs font-bold text-ocean-600 bg-ocean-50 px-2 py-1 rounded-md">
                           Nilai: {log.grade}
                         </span>
                       )}
@@ -145,7 +145,7 @@ export function StudentDetailModal({ isOpen, onClose, data, loading }: Props) {
                       {log.bookType && <p>Buku/Jilid: <span className="font-medium text-slate-700">{log.bookType}</span></p>}
                       {(log.startDetail || log.endDetail) && (
                         <p>
-                          Capaian: <span className="font-medium text-[#800000]">{log.startDetail} {log.endDetail && `- ${log.endDetail}`}</span>
+                          Capaian: <span className="font-medium text-brand-600">{log.startDetail} {log.endDetail && `- ${log.endDetail}`}</span>
                         </p>
                       )}
                     </div>

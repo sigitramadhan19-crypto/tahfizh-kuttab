@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { adminResetUserPasswordAction } from "./actions";
 import Link from "next/link";
 import { Spinner } from "@/components/ui/spinner";
+import { PageHeader } from "@/components/layout/PageHeader";
 
 type UserData = {
   id: string;
@@ -57,22 +58,20 @@ export function UsersClient({ users }: UsersClientProps) {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-paper">
       <div className="max-w-7xl mx-auto">
-        <header className="bg-gradient-to-r from-[#800000] to-[#b30000] text-white p-4 sm:p-6 shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0 md:rounded-b-2xl">
-          <div>
-            <div className="flex items-center gap-3">
-              <Link href="/kepsek" className="hover:bg-white/20 p-2 -ml-2 rounded-full transition-colors">
-                <ArrowLeft className="w-5 h-5" />
-              </Link>
-              <h1 className="text-xl sm:text-2xl font-bold">Manajemen Pengguna</h1>
-            </div>
-            <p className="text-red-200 text-sm ml-9 sm:ml-12 mt-1 sm:mt-0">Kelola akun dan reset password Guru</p>
-          </div>
-        </header>
+        <PageHeader
+          title="Manajemen Pengguna"
+          subtitle="Kelola akun dan reset password guru"
+          back={
+            <Link href="/kepsek" aria-label="Kembali ke dasbor" className="size-10 -ml-2 grid place-items-center rounded-full text-slate-600 hover:bg-slate-100 transition-colors">
+              <ArrowLeft className="w-5 h-5" />
+            </Link>
+          }
+        />
 
         <main className="p-4 sm:p-6 space-y-6">
-          <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+          <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden">
             <div className="p-4 sm:p-6 border-b border-slate-100 flex flex-col sm:flex-row gap-4 items-center bg-slate-50/50">
               <div className="w-full sm:max-w-md space-y-1.5">
                 <div className="relative">
@@ -82,7 +81,7 @@ export function UsersClient({ users }: UsersClientProps) {
                     placeholder="Cari nama atau username..."
                     value={searchName}
                     onChange={e => setSearchName(e.target.value)}
-                    className="w-full h-10 pl-9 pr-3 rounded-lg border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-[#800000] bg-white transition-all"
+                    className="w-full h-10 pl-9 pr-3 rounded-lg border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-brand-400 bg-white transition-all"
                   />
                 </div>
               </div>
@@ -118,7 +117,7 @@ export function UsersClient({ users }: UsersClientProps) {
                             : '-'}
                         </td>
                         <td className="px-6 py-4">
-                          <span className={`px-2.5 py-1 text-[10px] font-bold rounded-full ${user.role === 'GURU' ? 'bg-blue-100 text-blue-700' : 'bg-purple-100 text-purple-700'}`}>
+                          <span className={`px-2.5 py-1 text-[10px] font-bold rounded-full ${user.role === 'GURU' ? 'bg-ocean-100 text-ocean-700' : 'bg-cocoa-100 text-cocoa-700'}`}>
                             {user.role}
                           </span>
                         </td>
@@ -127,7 +126,7 @@ export function UsersClient({ users }: UsersClientProps) {
                             variant="outline" 
                             size="sm"
                             onClick={() => handleOpenResetModal(user)}
-                            className="h-8 px-3 text-red-600 border-red-200 hover:bg-red-50 hover:text-red-700 transition-colors"
+                            className="h-8 px-3 text-brand-600 border-brand-200 hover:bg-brand-50 hover:text-brand-700 transition-colors"
                           >
                             <KeyRound className="w-4 h-4 mr-1.5" />
                             <span className="text-xs font-semibold">Reset Password</span>
@@ -151,7 +150,7 @@ export function UsersClient({ users }: UsersClientProps) {
                   <div key={user.id} className="px-4 py-4 space-y-3">
                     <div className="flex items-start justify-between gap-2">
                       <span className="font-bold text-slate-800 text-sm leading-tight">{user.name}</span>
-                      <span className={`px-2 py-0.5 text-[10px] font-bold rounded-full shrink-0 ${user.role === 'GURU' ? 'bg-blue-100 text-blue-700' : 'bg-purple-100 text-purple-700'}`}>
+                      <span className={`px-2 py-0.5 text-[10px] font-bold rounded-full shrink-0 ${user.role === 'GURU' ? 'bg-ocean-100 text-ocean-700' : 'bg-cocoa-100 text-cocoa-700'}`}>
                         {user.role}
                       </span>
                     </div>
@@ -166,7 +165,7 @@ export function UsersClient({ users }: UsersClientProps) {
                         variant="outline" 
                         size="sm"
                         onClick={() => handleOpenResetModal(user)}
-                        className="h-8 px-3 text-xs text-red-600 border-red-200 hover:bg-red-50 hover:text-red-700 w-full"
+                        className="h-8 px-3 text-xs text-brand-600 border-brand-200 hover:bg-brand-50 hover:text-brand-700 w-full"
                       >
                         <KeyRound className="w-3 h-3 mr-1.5" />
                         Reset Password
@@ -199,10 +198,10 @@ export function UsersClient({ users }: UsersClientProps) {
                     minLength={6}
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
-                    className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#800000] text-slate-800"
+                    className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-400 text-slate-800"
                     placeholder="Masukkan password baru..."
                   />
-                  <p className="text-xs text-amber-600 font-medium">
+                  <p className="text-xs text-olive-700 font-medium">
                     *User akan diminta untuk mengganti password ini saat login berikutnya.
                   </p>
                 </div>
@@ -219,7 +218,7 @@ export function UsersClient({ users }: UsersClientProps) {
                   </Button>
                   <Button
                     type="submit"
-                    className="w-full bg-[#800000] hover:bg-[#660000] text-white"
+                    className="w-full bg-brand-600 hover:bg-brand-700 text-white"
                     disabled={isSubmitting}
                   >
                     {isSubmitting && <Spinner size="sm" className="text-white mr-2" />}

@@ -1,10 +1,9 @@
 import { getSession } from "@/lib/auth";
+import { PageHeader } from "@/components/layout/PageHeader";
 import { prisma } from "@/lib/prisma";
 import { redirect } from "next/navigation";
 import { RiwayatClient } from "./RiwayatClient";
-import { logoutAction } from "@/app/login/actions";
-import { Button } from "@/components/ui/button";
-import { LogOut } from "lucide-react";
+
 
 export default async function RiwayatPage() {
   const sessionId = await getSession();
@@ -49,23 +48,7 @@ export default async function RiwayatPage() {
 
   return (
     <div className="space-y-6 pb-24">
-      {/* Header with Gradient */}
-      <div className="bg-gradient-to-r from-[#800000] to-[#b30000] sm:rounded-b-3xl px-6 pt-10 pb-10 shadow-lg relative overflow-hidden">
-        <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
-        <div className="absolute bottom-0 left-0 w-32 h-32 bg-black/10 rounded-full blur-xl"></div>
-        
-        <header className="flex justify-between items-start relative z-10">
-          <div className="text-white space-y-1">
-            <h1 className="text-xl sm:text-2xl font-extrabold tracking-tight">Riwayat Setoran</h1>
-            <p className="text-white/80 font-medium">Kelas: {teacher.classes[0].name}</p>
-          </div>
-          <form action={logoutAction}>
-            <Button type="submit" variant="ghost" size="icon" className="text-white/80 hover:text-white hover:bg-white/20 transition-all rounded-full" title="Keluar">
-              <LogOut className="w-5 h-5" />
-            </Button>
-          </form>
-        </header>
-      </div>
+      <PageHeader title="Riwayat Setoran" subtitle={teacher.classes[0].name} />
       
       <div className="px-4">
         <RiwayatClient logs={logs} students={students} />

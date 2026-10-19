@@ -36,10 +36,10 @@ export function PeriodFilter() {
   };
 
   return (
-    <div className="flex items-center gap-2 bg-white/10 p-1 rounded-lg backdrop-blur-sm border border-white/20">
-      <CalendarDays className="w-4 h-4 text-white/90 ml-2" />
+    <div className="flex items-center gap-2 bg-white p-1 rounded-xl border border-slate-200 shadow-sm">
+      <CalendarDays className="w-4 h-4 text-brand-600 ml-2" />
       <select 
-        className="bg-transparent text-white text-sm font-medium outline-none cursor-pointer appearance-none pr-6 py-1 [&>option]:text-slate-800 disabled:opacity-50"
+        className="bg-transparent text-slate-700 text-sm font-semibold outline-none cursor-pointer appearance-none pr-6 py-1.5 disabled:opacity-50"
         value={currentPeriod}
         onChange={handlePeriodChange}
         disabled={isPending}
@@ -52,7 +52,7 @@ export function PeriodFilter() {
       </select>
       {isPending && (
         <span className="mr-2 animate-in fade-in zoom-in-50 duration-200">
-          <Spinner size="sm" className="text-white" />
+          <Spinner size="sm" className="text-slate-500" />
         </span>
       )}
     </div>

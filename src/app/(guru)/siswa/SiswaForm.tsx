@@ -159,7 +159,7 @@ export function SiswaForm({ initialStudents }: SiswaFormProps) {
         <Button 
           onClick={handleSave} 
           disabled={isSaving}
-          className="bg-[#800000] hover:bg-[#600000] text-white font-bold shadow-md w-full h-12 rounded-xl text-base"
+          className="bg-brand-600 hover:bg-brand-700 text-white font-bold shadow-md w-full h-12 rounded-xl text-base"
         >
           {isSaving && <Spinner size="sm" className="text-white mr-2" />}
           {isSaving ? "Menyimpan..." : "Simpan Semua Perubahan"}

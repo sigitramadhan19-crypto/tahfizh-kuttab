@@ -31,12 +31,12 @@ export function ProgressChart({ data }: ProgressChartProps) {
               bottom: 40, // space for angled labels
             }}
           >
-            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#eeeeec" />
             <XAxis 
               dataKey="nama" 
-              tick={{ fill: '#64748b', fontSize: 12 }}
+              tick={{ fill: '#6b7377', fontSize: 12 }}
               tickLine={false}
-              axisLine={{ stroke: '#cbd5e1' }}
+              axisLine={{ stroke: '#c6c9c9' }}
               angle={-45}
               textAnchor="end"
               interval={0}
@@ -44,24 +44,24 @@ export function ProgressChart({ data }: ProgressChartProps) {
             <YAxis 
               yAxisId="left"
               orientation="left"
-              tick={{ fill: '#64748b', fontSize: 12 }}
+              tick={{ fill: '#6b7377', fontSize: 12 }}
               tickLine={false}
               axisLine={false}
             />
             <YAxis 
               yAxisId="right"
               orientation="right"
-              tick={{ fill: '#64748b', fontSize: 12 }}
+              tick={{ fill: '#6b7377', fontSize: 12 }}
               tickLine={false}
               axisLine={false}
             />
             <Tooltip 
-              cursor={{ fill: '#f8fafc' }}
-              contentStyle={{ borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
+              cursor={{ fill: '#f6f6f5' }}
+              contentStyle={{ borderRadius: '12px', border: '1px solid #e0e1df', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
             />
             <Legend wrapperStyle={{ paddingTop: '20px' }} />
-            <Bar yAxisId="left" dataKey="totalSetoran" name="Total Setoran" fill="#800000" radius={[4, 4, 0, 0]} barSize={30} />
-            <Bar yAxisId="right" dataKey="totalJuz" name="Total Juz Hafal" fill="#10b981" radius={[4, 4, 0, 0]} barSize={30} />
+            <Bar yAxisId="left" dataKey="totalSetoran" name="Total Setoran" fill="#b73b3b" radius={[4, 4, 0, 0]} barSize={30} />
+            <Bar yAxisId="right" dataKey="totalJuz" name="Total Juz Hafal" fill="#3b87b8" radius={[4, 4, 0, 0]} barSize={30} />
           </BarChart>
         </ResponsiveContainer>
       </div>

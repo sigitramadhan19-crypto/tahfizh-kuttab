@@ -3,32 +3,31 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Home, PlusCircle, History, Users, BarChart3 } from "lucide-react";
 
+const ITEMS = [
+  { href: "/", label: "Beranda", Icon: Home },
+  { href: "/input", label: "Input", Icon: PlusCircle },
+  { href: "/siswa", label: "Siswa", Icon: Users },
+  { href: "/rekap", label: "Rekap", Icon: BarChart3 },
+  { href: "/riwayat", label: "Riwayat", Icon: History },
+];
+
 export function BottomNav() {
   const pathname = usePathname();
 
   return (
-    <div className="fixed bottom-0 w-full bg-white border-t border-slate-200 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] pb-safe z-50 print:hidden">
-      <div className="flex justify-around items-center h-16 max-w-3xl mx-auto">
-        <Link href="/" className={`flex flex-col items-center justify-center w-full h-full transition-colors ${pathname === '/' ? 'text-[#800000]' : 'text-slate-500 hover:text-[#b30000]'}`}>
-          <Home className="w-5 h-5 mb-1" />
-          <span className="text-[10px] font-semibold">Beranda</span>
-        </Link>
-        <Link href="/input" className={`flex flex-col items-center justify-center w-full h-full transition-colors ${pathname === '/input' ? 'text-[#800000]' : 'text-slate-500 hover:text-[#b30000]'}`}>
-          <PlusCircle className="w-5 h-5 mb-1" />
-          <span className="text-[10px] font-semibold">Input</span>
-        </Link>
-        <Link href="/siswa" className={`flex flex-col items-center justify-center w-full h-full transition-colors ${pathname === '/siswa' ? 'text-[#800000]' : 'text-slate-500 hover:text-[#b30000]'}`}>
-          <Users className="w-5 h-5 mb-1" />
-          <span className="text-[10px] font-semibold">Siswa</span>
-        </Link>
-        <Link href="/rekap" className={`flex flex-col items-center justify-center w-full h-full transition-colors ${pathname === '/rekap' ? 'text-[#800000]' : 'text-slate-500 hover:text-[#b30000]'}`}>
-          <BarChart3 className="w-5 h-5 mb-1" />
-          <span className="text-[10px] font-semibold">Rekap</span>
-        </Link>
-        <Link href="/riwayat" className={`flex flex-col items-center justify-center w-full h-full transition-colors ${pathname === '/riwayat' ? 'text-[#800000]' : 'text-slate-500 hover:text-[#b30000]'}`}>
-          <History className="w-5 h-5 mb-1" />
-          <span className="text-[10px] font-semibold">Riwayat</span>
-        </Link>
+    <div className="fixed bottom-0 w-full bg-white/95 backdrop-blur border-t border-slate-200 pb-safe z-50 print:hidden">
+      <div className="grid grid-cols-5 max-w-3xl mx-auto">
+        {ITEMS.map(({ href, label, Icon }) => {
+          const active = pathname === href;
+          return (
+            <Link key={href} href={href} className={`flex flex-col items-center gap-0.5 pt-2.5 pb-2 text-[11px] font-semibold transition-colors ${active ? "text-brand-700" : "text-slate-500 hover:text-brand-600"}`}>
+              <span className={`grid place-items-center h-7 w-12 rounded-full transition-colors ${active ? "bg-brand-50" : ""}`}>
+                <Icon className="w-5 h-5" strokeWidth={active ? 2.4 : 2} />
+              </span>
+              {label}
+            </Link>
+          );
+        })}
       </div>
     </div>
   );
